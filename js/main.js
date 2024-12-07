@@ -357,7 +357,7 @@ function proveriContact(){
         ispravno = false;
     }
     else document.querySelector("#number + p").className = 'hide';
-    if(contactForm.message.value == ''){
+    if(contactForm.services.value == ''){
         document.querySelector(".col-lg-12 p").className = 'text-danger';
         ispravno = false;
     }
