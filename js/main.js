@@ -170,7 +170,6 @@ let sobe = ['Choose...',1,2,3,4];
 
 let kontaktUsluge = ['Reservations','Events','Complaints'];
 
-
 //nav i drustvene
 function meniLinkHTML(linkovi){
     let putanja = window.location.pathname;
@@ -202,11 +201,13 @@ function ubaciLinkSadrzaj(selektor, sadrzaj, elementTip){
 });
 }
 
+if(window.location.pathname == '/Sona/')window.location.pathname += 'index.html';
+
 ubaciLinkSadrzaj(".mainmenu", meniLinkHTML(meniLinkovi), "ul");
 ubaciLinkSadrzaj("[class$='-social']", drustveneLinkHTML(drustveneLinkovi), "div");
 
 //forma index.html
-if(window.location.pathname == '/Sona/index.html' || window.location.pathname == '/Sona/'){
+if(window.location.pathname == '/Sona/index.html'){
     napraviOptions(gosti,'#guest');
     napraviOptions(sobe,'#room');
 }
@@ -261,7 +262,7 @@ function uslugeHTML(usluga){
                     </div>`   
 }
 
-if(window.location.pathname == '/Sona/index.html' || window.location.pathname == '/Sona/'){
+if(window.location.pathname == '/Sona/index.html'){
     let novaUsluga = document.createElement("div");
     novaUsluga.className= "row";
     for(let usluga of uslugeSadrzaj){
@@ -290,7 +291,7 @@ function napraviOptions(nizOptiona, selektor){
     document.querySelector(selektor).innerHTML = sadrzaj;
 }
 
-if(window.location.pathname == '/Sona/index.html' || window.location.pathname == '/Sona/'){
+if(window.location.pathname == '/Sona/index.html'){
     let tipovi = ['All'];
     blogoviSadrzaj.forEach(blog => {
     if (!tipovi.includes(blog.tip)) {
@@ -313,7 +314,7 @@ function napraviBlogove(){
     }
     drzac.appendChild(noviElement);
 }
-if(window.location.pathname == '/Sona/index.html' || window.location.pathname == '/Sona/'){
+if(window.location.pathname == '/Sona/index.html'){
     addEventListener("load", napraviBlogove);
     document.getElementById("blogType").onchange = napraviBlogove;
 }
@@ -356,7 +357,7 @@ function proveriContact(){
         ispravno = false;
     }
     else document.querySelector("#number + p").className = 'hide';
-    if(contactForm.services.value == ''){
+    if(contactForm.message.value == ''){
         document.querySelector(".col-lg-12 p").className = 'text-danger';
         ispravno = false;
     }
