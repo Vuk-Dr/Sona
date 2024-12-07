@@ -168,6 +168,9 @@ let blogoviSadrzaj = [
 let gosti = ['Choose...',1,2,3,4,5,6];
 let sobe = ['Choose...',1,2,3,4];
 
+let kontaktUsluge = ['Reservations','Events','Complaints'];
+
+
 //nav i drustvene
 function meniLinkHTML(linkovi){
     let putanja = window.location.pathname;
@@ -203,18 +206,48 @@ ubaciLinkSadrzaj(".mainmenu", meniLinkHTML(meniLinkovi), "ul");
 ubaciLinkSadrzaj("[class$='-social']", drustveneLinkHTML(drustveneLinkovi), "div");
 
 //forma index.html
-napraviOptions(gosti,'#guest');
-napraviOptions(sobe,'#room');
+if(window.location.pathname == '/index.html'){
+    napraviOptions(gosti,'#guest');
+    napraviOptions(sobe,'#room');
+}
+
 
 function proveriIndex(){
-    const trVreme = new Date();
-    const trDatum = trVreme.toLocaleDateString('en-CA');
+    let trVreme = new Date();
+    let trDatum = trVreme.toLocaleDateString('en-CA');
+    let ispravno = true;
     let datDolaska = document.querySelector('#date-in');
     let datOdlaska = document.querySelector('#date-out');
-    if(datDolaska < trDatum){
-        document.querySelector("#date-in-error").className = '';
+    if(datDolaska.value < trDatum){
+        document.querySelector("#date-in + p").className = 'text-danger';
+        ispravno = false;
     }
-    else document.querySelector("#date-in-error").className = 'hide';
+    else document.querySelector("#date-in + p").className = 'hide';
+    if(datOdlaska.value < datDolaska.value){
+        document.querySelector("#date-out + p").className = 'text-danger';
+        ispravno = false;
+    }
+    else document.querySelector("#date-out + p").className = 'hide';
+    
+    if(document.querySelector("#guest").value == gosti[0]){
+        document.querySelector("#guest-p-missing").className = 'text-danger';
+        ispravno = false;
+    }
+    else document.querySelector("#guest-p-missing").className = 'hide';
+
+    if(document.querySelector("#room").value == sobe[0]){
+        document.querySelector("#room-p-missing").className = 'text-danger';
+        ispravno = false;
+    }
+    else document.querySelector("#room-p-missing").className = 'hide';
+
+    if(document.querySelector("#guest").value < document.querySelector("#room").value){
+        document.querySelector("#room-p").className = 'text-danger';
+        ispravno = false;
+    }
+    else document.querySelector("#room-p").className = 'hide';
+
+    ispravno ? document.querySelector("#form-success").className = 'text-success' : document.querySelector("#form-success").className = 'hide'
 }
 
 //usluge
@@ -228,13 +261,14 @@ function uslugeHTML(usluga){
                     </div>`   
 }
 
-let novaUsluga = document.createElement("div");
-novaUsluga.className= "row";
-for(let usluga of uslugeSadrzaj){
-    novaUsluga.innerHTML += uslugeHTML(usluga);
+if(window.location.pathname == '/index.html'){
+    let novaUsluga = document.createElement("div");
+    novaUsluga.className= "row";
+    for(let usluga of uslugeSadrzaj){
+        novaUsluga.innerHTML += uslugeHTML(usluga);
+    }
+    document.querySelector("#services .container").appendChild(novaUsluga);
 }
-document.querySelector("#services .container").appendChild(novaUsluga);
-
 //blog
 function blogoviHTML(blog){
     return sadrzaj =  `<div class="col-lg-${blog.sirina}">
@@ -248,7 +282,7 @@ function blogoviHTML(blog){
                     </div>`
 }
 
-function napraviOptions(nizOptiona, selektor){////////////////////////////////////////////////////////////////
+function napraviOptions(nizOptiona, selektor){
     let sadrzaj = '';
     nizOptiona.forEach(option => {
         sadrzaj += `<option value='${option}'>${option}</option>`
@@ -256,13 +290,16 @@ function napraviOptions(nizOptiona, selektor){//////////////////////////////////
     document.querySelector(selektor).innerHTML = sadrzaj;
 }
 
-let tipovi = ['All'];
-blogoviSadrzaj.forEach(blog => {
+if(window.location.pathname == '/index.html'){
+    let tipovi = ['All'];
+    blogoviSadrzaj.forEach(blog => {
     if (!tipovi.includes(blog.tip)) {
         tipovi.push(blog.tip);
     }
-});
-napraviOptions(tipovi, "#blogType");
+    });
+    napraviOptions(tipovi, "#blogType");
+}
+
 
 function napraviBlogove(){
     drzac = document.querySelector("#blog .container")
@@ -276,18 +313,83 @@ function napraviBlogove(){
     }
     drzac.appendChild(noviElement);
 }
-addEventListener("load", napraviBlogove);
-document.getElementById("blogType").onchange = napraviBlogove;
+if(window.location.pathname == '/index.html'){
+    addEventListener("load", napraviBlogove);
+    document.getElementById("blogType").onchange = napraviBlogove;
+}
+
+//contact.html forma
+if(window.location.pathname == '/contact.html'){
+    let noviElement = document.createElement("div");
+    let sadrzaj = '';
+    kontaktUsluge.forEach(usluga => {
+        sadrzaj += `<input type='radio' name='services' id='${usluga}' value='${usluga}'>
+                    <label for='${usluga}'>${usluga}</label><br/>`
+    });
+    noviElement.innerHTML = sadrzaj;
+    document.querySelector('#contact-services').appendChild(noviElement);
+
+}
+const imeRegex = /^[A-ZČĆŽŠĐ][a-zčćžšđ]{2,14}$/
+const prezimeRegex = /^([A-ZŠĐČĆŽ][a-zšđčćž]+)([ ][A-ZŠĐČĆŽ][a-zšđčćž]+)*$/
+const emailRegex = /^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+const brojRegex = /^\+381\d{8,9}$/
+function proveriContact(){
+    let ispravno = true;
+    if(!imeRegex.test(contactForm.firstName.value)){
+        document.querySelector("#firstName + p").className = 'text-danger';
+        ispravno = false;
+    }
+    else document.querySelector("#firstName + p").className = 'hide';
+    if(!prezimeRegex.test(contactForm.lastName.value)){
+        document.querySelector("#lastName + p").className = 'text-danger';
+        ispravno = false;
+    }
+    else document.querySelector("#lastName + p").className = 'hide';
+    if(!emailRegex.test(contactForm.email.value)){
+        document.querySelector("#email + p").className = 'text-danger';
+        ispravno = false;
+    }
+    else document.querySelector("#email + p").className = 'hide';
+    if(!brojRegex.test(contactForm.number.value)){
+        document.querySelector("#number + p").className = 'text-danger';
+        ispravno = false;
+    }
+    else document.querySelector("#number + p").className = 'hide';
+    if(contactForm.services.value == ''){
+        document.querySelector(".col-lg-12 p").className = 'text-danger';
+        ispravno = false;
+    }
+    else document.querySelector(".col-lg-12 p").className = 'hide';
+    if(contactForm.message.value == ''){
+        document.querySelector("#message-error").innerHTML = 'Enter a message';
+        document.querySelector("#message-error").className = 'text-danger';
+        ispravno = false;
+    }
+    else document.querySelector("#message-error").className = 'hide';
+    
+    if(ispravno){
+        document.querySelector("#message-error").innerHTML = 'Submitted successfully';
+        document.querySelector("#message-error").className = 'text-success';
+    }
+        
+}
+
+//email footer
+function footerEmail(){
+    if(emailRegex.test(document.getElementById('footer-email').value)){
+        document.getElementById('footer-email-info').innerHTML = 'Sent!';
+        document.getElementById('footer-email-info').className = 'text-success';
+    }
+    else{
+        document.getElementById('footer-email-info').innerHTML = 'Invalid email';
+        document.getElementById('footer-email-info').className = 'text-danger';
+    }
+}
 
 
-
-
-
-
-
-
-//about us modal
 $(document).ready(function () {
+    //modal pojavljivanje 
     $('.about-btn').click(function () {
         $('.modal-overlay').fadeIn();
         $('.modal').slideDown();
@@ -299,6 +401,7 @@ $(document).ready(function () {
         });
     });
 
+    // pojavljivanje dugmeta
     $(window).scroll(function () {
         if ($(this).scrollTop() > 200) {
             $('#back-to-top').fadeIn();
@@ -307,22 +410,20 @@ $(document).ready(function () {
         }
     });
 
-    // Animacija skrolovanja na vrh kada se klikne na dugme
+    // vracanje na vrh dugmeta
     $('#back-to-top').click(function () {
         $('html, body').animate({ scrollTop: 0 }, 0);
         return false;
     });
 
-    // Pomicanje dugmeta gore kada se pređe mišem preko njega
+    // mrdanje btt dugmeta
     $('#back-to-top').hover(
         function() {
-            // Kada miš uđe u element
             $(this).stop(true,true);
             $(this).animate({ bottom: '+=12' }, 200);
             $(this).css('background-color', '#8a5e31');
         },
         function() {
-            // Kada miš izađe iz elementa
             $(this).stop(true,true);
             $(this).animate({ bottom: '-=12' }, 200);
             $(this).css('background-color', '#dfa974');

@@ -151,6 +151,7 @@
                                 <li>+381 60 1234567</li>
                                 <li>vuk.drobnjakovic.12.23@ict.edu.rs</li>
                                 <li>Zdravka Čelara 16, Beograd</li>
+                                <li><a class="h6 text-light" href="dokumentacija.pdf">DOKUMENTACIJA</a></li>
                             </ul>
                         </div>
                     </div>
@@ -159,8 +160,9 @@
                             <h6>New latest</h6>
                             <p>Get the latest updates and offers.</p>
                             <form action="#" class="fn-form">
-                                <input type="text" placeholder="Email">
-                                <button type="submit"><i class="fa fa-send"></i></button>
+                                <input id="footer-email" type="text" placeholder="Email">
+                                <button type="button" onclick="footerEmail()"><i class="fa fa-send"></i></button>
+                                <p id="footer-email-info" class="hide">Sent!</p>
                             </form>
                         </div>
                     </div>

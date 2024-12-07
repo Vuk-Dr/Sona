@@ -114,42 +114,57 @@
                 <div class="col-lg-4">
                     <div class="contact-text">
                         <h2>Contact Info</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua.</p>
+                        <p>We’re here to help! Whether you have a question about our products, services, or need assistance with an order,
+                             our team is ready to assist you. Feel free to reach out to us through any of the channels below.</p>
                         <table>
                             <tbody>
                                 <tr>
                                     <td class="c-o">Address:</td>
-                                    <td>856 Cordia Extension Apt. 356, Lake, US</td>
+                                    <td>Zdravka Čelara 16, Beograd</td>
                                 </tr>
                                 <tr>
                                     <td class="c-o">Phone:</td>
-                                    <td>(12) 345 67890</td>
+                                    <td>+381 60 1234567</td>
                                 </tr>
                                 <tr>
                                     <td class="c-o">Email:</td>
-                                    <td>info.colorlib@gmail.com</td>
+                                    <td>vuk.drobnjakovic.12.23@ict.edu.rs</td>
                                 </tr>
                                 <tr>
                                     <td class="c-o">Fax:</td>
-                                    <td>+(12) 345 67890</td>
+                                    <td>+381 66 1234</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="col-lg-7 offset-lg-1">
-                    <form action="#" class="contact-form">
+                    <form action="#" class="contact-form" name="contactForm">
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="text" placeholder="Your Name">
+                                <input type="text" class="input-form" placeholder="Name *" name="firstName" id="firstName">
+                                <p class="hide">Must start with an uppercase letter, followed by 2-15 lowercase letters</p>
                             </div>
                             <div class="col-lg-6">
-                                <input type="text" placeholder="Your Email">
+                                <input type="text" class="input-form" placeholder="Last name *" name="lastName" id="lastName">
+                                <p class="hide">Must start with an uppercase letter, followed by lowercase letters</p>
                             </div>
-                            <div class="col-lg-12">
-                                <textarea placeholder="Your Message"></textarea>
-                                <button type="submit">Submit Now</button>
+                            <div class="col-lg-6">
+                                <input type="text" class="input-form" placeholder="Email *" name="email" id="email">
+                                <p class="hide">The email must include "@" followed by a valid domain, such as example.com</p>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="input-form" placeholder="Number *" name="number" id="number">
+                                <p class="hide">Phone number must start with "+381" digits, followed by 8-9 numbers</p>
+                            </div>
+                            <div class="col-lg-6" id="contact-services">
+                                    <p class="mb-1">Choose a service: *</p> 
+                            </div>
+                            <span class='col-lg-12'><p class="hide">Must choose a service</p></span>
+                            <div class="col-lg-12 d-flex align-items-center flex-column mt-2">
+                                <textarea placeholder="Your Message *" name="message"></textarea>
+                                <p id="message-error" class="hide">Enter a message</p>
+                                <button type="button" onclick="proveriContact()">Submit Now</button>
                             </div>
                         </div>
                     </form>
@@ -189,6 +204,7 @@
                                 <li>+381 60 1234567</li>
                                 <li>vuk.drobnjakovic.12.23@ict.edu.rs</li>
                                 <li>Zdravka Čelara 16, Beograd</li>
+                                <li><a class="h6 text-light" href="dokumentacija.pdf">DOKUMENTACIJA</a></li>
                             </ul>
                         </div>
                     </div>
@@ -197,8 +213,9 @@
                             <h6>New latest</h6>
                             <p>Get the latest updates and offers.</p>
                             <form action="#" class="fn-form">
-                                <input type="text" placeholder="Email">
-                                <button type="submit"><i class="fa fa-send"></i></button>
+                                <input id="footer-email" type="text" placeholder="Email">
+                                <button type="button" onclick="footerEmail()"><i class="fa fa-send"></i></button>
+                                <p id="footer-email-info" class="hide"></p>
                             </form>
                         </div>
                     </div>

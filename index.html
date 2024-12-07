@@ -126,24 +126,28 @@
                             <div class="check-dates">
                                 <label for="date-in">Check In:</label>
                                 <input type="date" class="date" id="date-in">
-                                <p id='date-in-error' class="hide">Invalid date</p>
+                                <p class="hide">Invalid date or date older than today</p>
                             </div>
                             <div class="check-dates">
                                 <label for="date-out">Check Out:</label>
                                 <input type="date" class="date" id="date-out">
-                                <p id='date-out-error' class="hide">Invalid date</p>
+                                <p class="hide">Date older than Check Out date</p>
                             </div>
                             <div class="select-option">
                                 <label for="guest">Guests:</label>
                                 <select id="guest">
                                 </select>
+                                <p id="guest-p-missing" class="hide">Must choose value</p>
                             </div>
                             <div class="select-option">
                                 <label for="room">Room:</label>
                                 <select id="room">
                                 </select>
+                                <p id="room-p-missing" class="hide">Must choose value</p>
+                                <p id="room-p" class="hide">Can't select more rooms than guests</p>
                             </div>
-                            <button type="submit" onsubmit="proveriIndex">Check Availability</button>
+                            <button type="button" onclick="proveriIndex()">Check Availability</button>
+                            <p id="form-success" class="hide">Success, searching for rooms...</p>
                         </form>
                     </div>
                 </div>
@@ -446,6 +450,7 @@
                                 <li>+381 60 1234567</li>
                                 <li>vuk.drobnjakovic.12.23@ict.edu.rs</li>
                                 <li>Zdravka Čelara 16, Beograd</li>
+                                <li><a class="h6 text-light" href="dokumentacija.pdf">DOKUMENTACIJA</a></li>
                             </ul>
                         </div>
                     </div>
@@ -454,8 +459,9 @@
                             <h6>New latest</h6>
                             <p>Get the latest updates and offers.</p>
                             <form action="#" class="fn-form">
-                                <input type="text" placeholder="Email">
-                                <button type="submit"><i class="fa fa-send"></i></button>
+                                <input id="footer-email" type="text" placeholder="Email">
+                                <button type="button" onclick="footerEmail()"><i class="fa fa-send"></i></button>
+                                <p id="footer-email-info" class="hide">Sent!</p>
                             </form>
                         </div>
                     </div>

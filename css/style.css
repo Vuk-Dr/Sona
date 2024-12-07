@@ -61,8 +61,8 @@
 	padding-right: 13px;
 }
 .hide{
-	color: red !important;
 	display: none;
+	margin: 0px;
 }
 #guest{
 	color: #000;
@@ -1953,14 +1953,14 @@ ul, ol {
 	color: #707079;
 	width: 75px;
 }
-.contact-form input {
+.input-form {
 	width: 100%;
 	height: 50px;
 	border: 1px solid #e1e1e1;
 	font-size: 16px;
 	color: #aaaab3;
 	padding-left: 25px;
-	margin-bottom: 28px;
+	margin: 10px 0px;
 }
 .contact-form input::-webkit-input-placeholder {
 	color: #aaaab3;
