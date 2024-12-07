@@ -206,7 +206,7 @@ ubaciLinkSadrzaj(".mainmenu", meniLinkHTML(meniLinkovi), "ul");
 ubaciLinkSadrzaj("[class$='-social']", drustveneLinkHTML(drustveneLinkovi), "div");
 
 //forma index.html
-if(window.location.pathname == '/index.html'){
+if(window.location.pathname == '/Sona/index.html' || window.location.pathname == '/Sona/'){
     napraviOptions(gosti,'#guest');
     napraviOptions(sobe,'#room');
 }
@@ -261,7 +261,7 @@ function uslugeHTML(usluga){
                     </div>`   
 }
 
-if(window.location.pathname == '/index.html'){
+if(window.location.pathname == '/Sona/index.html' || window.location.pathname == '/Sona/'){
     let novaUsluga = document.createElement("div");
     novaUsluga.className= "row";
     for(let usluga of uslugeSadrzaj){
@@ -290,7 +290,7 @@ function napraviOptions(nizOptiona, selektor){
     document.querySelector(selektor).innerHTML = sadrzaj;
 }
 
-if(window.location.pathname == '/index.html'){
+if(window.location.pathname == '/Sona/index.html' || window.location.pathname == '/Sona/'){
     let tipovi = ['All'];
     blogoviSadrzaj.forEach(blog => {
     if (!tipovi.includes(blog.tip)) {
@@ -313,13 +313,13 @@ function napraviBlogove(){
     }
     drzac.appendChild(noviElement);
 }
-if(window.location.pathname == '/index.html'){
+if(window.location.pathname == '/Sona/index.html' || window.location.pathname == '/Sona/'){
     addEventListener("load", napraviBlogove);
     document.getElementById("blogType").onchange = napraviBlogove;
 }
 
 //contact.html forma
-if(window.location.pathname == '/contact.html'){
+if(window.location.pathname == '/Sona/contact.html'){
     let noviElement = document.createElement("div");
     let sadrzaj = '';
     kontaktUsluge.forEach(usluga => {
